@@ -9,8 +9,8 @@ class Block
     show() {
         normalMaterial();
         push();
-        translate(BLOCK_SIZE * this.position.x, -BLOCK_SIZE * this.position.z, BLOCK_SIZE * this.position.y);
-        fill(0, this.position.y * 10, 0);
+        translate(BLOCK_SIZE * this.position.x, -BLOCK_SIZE * this.position.y, BLOCK_SIZE * this.position.z);
+        fill(0, this.position.z * 10, 0);
         box(BLOCK_SIZE);
         pop();
     }
