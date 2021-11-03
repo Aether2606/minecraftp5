@@ -1,17 +1,21 @@
-const CHUNK_SIZE = 16;
-const CHUNK_VOLUME = CHUNK_SIZE * 1 * CHUNK_SIZE;
+const CHUNK_SIZE_X = 16;
+const CHUNK_SIZE_Y = 1;
+const CHUNK_SIZE_Z = 16;
+const CHUNK_VOLUME = CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z;
 
 class Chunk 
 {
     initChunk() {
-        for (let x = this.position.x; x < (this.position.x + CHUNK_SIZE); x++)
+        for (let x = this.position.x; x < (this.position.x + CHUNK_SIZE_X); x++)
 		{
-			for (let y = this.position.y; y < (this.position.y + CHUNK_SIZE); y++)
+			for (let y = this.position.y; y < (this.position.y + CHUNK_SIZE_Y); y++)
 			{
-				for (let z = this.position.z; z < (this.position.z + CHUNK_SIZE); z++)
+				for (let z = this.position.z; z < (this.position.z + CHUNK_SIZE_Z); z++)
 				{
 					let pos = createVector(x, y, z);
-					this.blocks[this.positionToIndex(pos)] = new Block(pos);
+                    let fixedPosition = createVector(x - this.position.x, y - this.position.y, z - this.position.z);
+                    
+					this.blocks[this.positionToIndex(fixedPosition)] = new Block(pos);
 				}
 			}
 		}
@@ -19,13 +23,13 @@ class Chunk
 
     constructor(offset) {
         this.offset = offset;
-        this.position = this.offset.mult(CHUNK_SIZE);
+        this.position = createVector(offset.x * CHUNK_SIZE_X, offset.y * CHUNK_SIZE_Y, offset.z * CHUNK_SIZE_Z);
         this.blocks = [];
         this.initChunk();
     }
 
     positionToIndex(pos) {
-        return pos.x + CHUNK_SIZE * (pos.y + CHUNK_SIZE * pos.z)
+        return pos.x + CHUNK_SIZE_X * (pos.y + CHUNK_SIZE_Y * pos.z)
     }
 
     getBlock(pos) {
