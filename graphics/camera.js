@@ -22,5 +22,24 @@ class Camera
 
         this.p5Camera.pan(-movedX * this.rotateSpeed);
         this.p5Camera.tilt(movedY * this.rotateSpeed);
+        //@note: used for block placing and breaking, disabled
+        //this.raycasting();
+    }
+
+    raycasting() {
+        let direction = createVector(this.p5Camera.upX, this.p5Camera.upY, this.p5Camera.upZ);
+        let ray = new Ray(this.position, direction);
+
+        for(; ray.getLength() < 8; ray.update())
+        {
+            let rounded = createVector(round(ray.getEnd().x), round(ray.getEnd().y), round(ray.getEnd().z));
+            let position = this.positionToChunkOffset(rounded);
+            console.log(ray.getLength())
+        }
+    }
+
+    positionToChunkOffset(position) {
+        let offset = createVector(floor(position.x / CHUNK_SIZE_X), floor(position.y / CHUNK_SIZE_Y), floor(position.z / CHUNK_SIZE_Z));
+        return offset;
     }
 }

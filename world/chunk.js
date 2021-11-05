@@ -1,5 +1,5 @@
 const CHUNK_SIZE_X = 16;
-const CHUNK_SIZE_Y = 1;
+const CHUNK_SIZE_Y = 3;
 const CHUNK_SIZE_Z = 16;
 const CHUNK_VOLUME = CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z;
 

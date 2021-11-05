@@ -10,8 +10,6 @@ let mouseCaptured = true;
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-
-  mouseCaptured = true;
   
   mainCamera = new Camera(createVector(0, 0, 0));
   testChunk = new Chunk(createVector(0, 0, 0));
@@ -26,6 +24,7 @@ function update() {
   (mouseCaptured ? requestPointerLock() : exitPointerLock());
   if(keyIsDown(KEY_Q)) mouseCaptured = !mouseCaptured;
 
+  cursor(CROSS);
   mainCamera.update();
   //console.log(frameRate());
 }
